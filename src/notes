@@ -1,0 +1,20 @@
+Ok so I have the ajax functions calling the Twitch stream API.
+
+  So if the channel in fact is live the 'get' methods will update the "Channels" state with
+the corresponding twitch data. //Perhaps I can significantly shorten the code by making an
+array and looping them through the $.ajax rather than making three separate methods for the
+damn things// <--work on that tomorrow.
+
+  Also, I think rather than having the data for an offline channel hardcoded I should instead
+run another $.ajax call when the if statement fails. Only this time, instead of calling
+the /stream/(where it doesn't give any information unless the channel is streaming )
+query I would call the /channel/ query(Where the channel information is provided always).
+This would update the state information from the actual API in real time
+rather than relying in the hard code I wrote...
+
+  On another note, I'm going to have to figure out a way to integrate the buttons and make them
+functional. I think it'll be a good idea to use the 'key' of the children elements to determine
+whether or not the twitch channel is live. Do this by simply mapping them and assign the key
+as key={this.state.x.status} <this will either be a title of whatever is streaming OR
+"Currently Offline" || "null"> if(key) then show else hide the element, remove?
+reverse for the offline button obviously! 
