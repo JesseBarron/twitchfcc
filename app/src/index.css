@@ -2,4 +2,55 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: rgba(0, 0, 225, 0.5);
+}
+.navbar{
+  display: flex;
+  margin-left: .5%;
+  margin-right: .5%;
+  background-color: rgba(0, 0, 0, 0.5);
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+h1{
+
+}
+.button{
+margin: 0 12px 0 12px;
+}
+.channel_body{
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  margin-right: 20%;
+  margin-left: 20%;
+  border: 2px solid red;
+  background-color: rgba(255, 0, 0, 0.5);
+}
+li{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  margin: 5px 5px 5px -25px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+p{
+  align-self: center;
+  border: 1px solid black;
+  margin-left: 5%;
+}
+h3{
+  margin-left: 5%;
+  border: 1px solid black;
+}
+img{
+  align-self: flex-start;
+  background-image:url("http://www.videoadnews.com/wp-content/uploads/2014/05/twitch-icon-box.jpg");
+  width: 2px;
+  height: 2px;
 }

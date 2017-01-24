@@ -8,14 +8,14 @@ class Navbar extends Component {
 
       return(
         <div className="navbar">
-          <div className='title'>
+          <h1 className='title'>
             Twitch Status
-            <div className='button'>
-              <button className='all'>All</button>
-              <button className='online'>Online</button>
-              <button className='offline'>Offline</button>
+          </h1>
+            <div className='button_group'>
+              <button id="all"className='button'>All</button>
+              <button id="online"className='button'>Online</button>
+              <button id="offline"className='button'>Offline</button>
             </div>
-          </div>
         </div>
       );
     }
