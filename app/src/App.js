@@ -120,7 +120,7 @@ class App extends Component {
                                   id: data._id
                                 }
                           this.setState({channels: this.state.channels.concat(test_channel)})
-                          console.log(this.state);
+                          //console.log(this.state);
                       }.bind(this)
                   })
               }
@@ -138,7 +138,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
-        <Channels channel={this.state}/>
+        <Channels channels={this.state.channels}/>
       </div>
     );
   }
