@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery'
 import './App.css';
-import Navbar from './Components/Navbar.js'
+import Navbar from './Components/Navbar'
 import Channels from './Components/Channels'
 
 
@@ -137,7 +137,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar />
+        <Navbar   />
         <Channels channels={this.state.channels}/>
       </div>
     );
