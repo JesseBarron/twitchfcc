@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
-import $ from 'jquery'
 import App from './../App'
-import Navbar from './Channels'
+
 
 class Channels extends Component {
+  removeChannel(stream){
+    this.props.onRemove(stream);
+  }
     render() {
       console.log(this.props.channels)
 
       const channelList = this.props.channels.map(channel => {
-      return  <li key={channel.id} ref={channel.stream} className='channel'>
+      return  <li key={channel.id} ref={channel.stream} className='channel' onClick={this.removeChannel.bind(this, channel.stream)}>
         <div className="channel_label">
          <a href={channel.url} target="_blank"> <img
           style={{
