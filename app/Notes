@@ -1,0 +1,14 @@
+A solution to displaying the Online, Offline and All Twitch channels.
+make TWO substates one for the OFFLINE channels and another for all the
+STREAMING ones.
+  When the the button corresponding to the respected status is clicked
+react will render those channels...
+  For this your going to have to make an appropriate Object
+structure in order to choose the appropriate set of data individual
+of the others. Additionally I'll have to figure out how render
+the specific state at the time the event is clicked. This might mean
+passing that certain set of data down to the channels child.
+or it might mean creating different states.... Either way this may
+not be the neatest or scalable solution but i suck and its the only
+one i can think of at the moment.. so yeah.. get to work on it
+tomorrow.

@@ -13,6 +13,7 @@ class App extends Component {
       }
   }
 
+
   getFreeCodeCamp() {
       $.ajax({
           url: 'https://wind-bow.gomix.me/twitch-api/streams/freecodecamp',
@@ -38,7 +39,7 @@ class App extends Component {
                           var freeCodeCamp = {
                               name: data.display_name,
                               status: "Currently Offline.",
-                              strem: null,
+                              stream: null,
                               logo: data.logo,
                               url: data.url,
                               id: data._id
@@ -47,7 +48,6 @@ class App extends Component {
                       }.bind(this)
                   })
               }
-
           }.bind(this)
       });
   }
@@ -128,16 +128,32 @@ class App extends Component {
       })
   }
 
-  componentDidMount() {
-      this.getFreeCodeCamp();
-      this.getESL_SC2();
-      this.getTest_Channel();
 
-  }
+
+  componentDidMount() {
+        this.getFreeCodeCamp();
+        this.getESL_SC2();
+        this.getTest_Channel();
+     }
+
+  showOnline(){
+    console.log("Showing Online");
+  };
+
+  showOffline(){
+    console.log("Showing Offline");
+  };
+
+  showAll(){
+    console.log("Showing all");
+  };
+
+
   render() {
+
     return (
       <div className="App">
-        <Navbar   />
+        <Navbar channels={this.state.channels} displayOnline={this.showOnline.bind(this)} displayOffline={this.showOffline.bind(this)} displayAll={this.showAll.bind(this)} />
         <Channels channels={this.state.channels}/>
       </div>
     );

@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
-import App from './../App'
 
 
 class Channels extends Component {
-  removeChannel(stream){
-    this.props.onRemove(stream);
+  removeChannel(channel){
+    this.props.remove(channel);
   }
     render() {
       console.log(this.props.channels)
 
       const channelList = this.props.channels.map(channel => {
-      return  <li key={channel.id} ref={channel.stream} className='channel' onClick={this.removeChannel.bind(this, channel.stream)}>
+      return  <li key={channel.id} ref={channel.stream} className='channel' onClick={this.removeChannel.bind(this, channel, channel.stream)}>
         <div className="channel_label">
          <a href={channel.url} target="_blank"> <img
           style={{
@@ -18,6 +17,7 @@ class Channels extends Component {
             height: 70,
               }}
             src={channel.logo}
+            alt=''
           />
           <h3>
             {channel.name}
