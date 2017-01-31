@@ -1,0 +1,18 @@
+
+
+class Test extends Component{
+  constructor(){
+    super();
+    this.state= {
+
+    }
+  }
+ getAjax(){
+   var streamArray=[]
+   var channelArray=[]
+
+   $.when.apply($, streamArray.map((url) => {
+     
+   }))
+ }
+}

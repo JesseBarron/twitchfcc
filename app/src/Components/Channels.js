@@ -6,15 +6,15 @@ class Channels extends Component {
     this.props.remove(channel);
   }
     render() {
-      console.log(this.props.channels)
+      console.log(this.props.offlineChannels)
 
-      const channelList = this.props.channels.map(channel => {
+      const channelList = this.props.onlineChannels.map(channel => {
       return  <li key={channel.id} ref={channel.stream} className='channel' onClick={this.removeChannel.bind(this, channel, channel.stream)}>
         <div className="channel_label">
          <a href={channel.url} target="_blank"> <img
           style={{
-            width: 70,
-            height: 70,
+            width: 90,
+            height: 90,
               }}
             src={channel.logo}
             alt=''

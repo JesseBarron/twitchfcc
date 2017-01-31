@@ -9,7 +9,9 @@ class App extends Component {
   constructor() {
       super();
       this.state = {
-          channels: []
+          allChannels: [],
+          onlineChannels: [],
+          offlineChannels: [],
       }
   }
 
@@ -28,8 +30,8 @@ class App extends Component {
                       status: data.stream.channel.status,
                       id: data.stream._id
                   };
-                  this.setState({channels: this.state.channels.concat(freeCodeCamp)})
-
+                  this.setState({allChannels: this.state.allChannels.concat(freeCodeCamp)})
+                  this.setState({onlineChannels: this.state.onlineChannels.concat(freeCodeCamp)})
               } else {
                   $.ajax({
                       url: "https://wind-bow.gomix.me/twitch-api/channels/freecodecamp",
@@ -44,7 +46,8 @@ class App extends Component {
                               url: data.url,
                               id: data._id
                           }
-                          this.setState({channels: this.state.channels.concat(freeCodeCamp)})
+                          this.setState({allChannels: this.state.allChannels.concat(freeCodeCamp)})
+                          this.setState({offlineChannels: this.state.offlineChannels.concat(freeCodeCamp)})
                       }.bind(this)
                   })
               }
@@ -66,7 +69,8 @@ class App extends Component {
                       status: data.stream.channel.status,
                       id: data.stream._id
                   }
-                  this.setState({channels: this.state.channels.concat(esl_sc2)})
+                  this.setState({allChannels: this.state.allChannels.concat(esl_sc2)})
+                  this.setState({onlineChannels: this.state.onlineChannels.concat(esl_sc2)})
               } else {
                   $.ajax({
                       url: 'https://wind-bow.gomix.me/twitch-api/channels/esl_sc2',
@@ -81,7 +85,8 @@ class App extends Component {
                               url: data.url,
                               id: data._id
                           }
-                          this.setState({channels: this.state.channels.concat(esl_sc2)})
+                          this.setState({allChannels: this.state.allChannels.concat(esl_sc2)})
+                          this.setState({offlineChannels: this.state.offlineChannels.concat(esl_sc2)})
                       }.bind(this)
 
                   })
@@ -104,7 +109,8 @@ class App extends Component {
                           status: data.stream.channel.status,
                           id: data.stream._id
                       }
-                      this.setState({channels: this.state.channels.concat(test_channel)})
+                      this.setState({allChannels: this.state.allChannels.concat(test_channel)})
+                      this.setState({onlineChannels: this.state.onlineChannels.concat(test_channel)})
               } else {
                   $.ajax({
                       url: "https://wind-bow.gomix.me/twitch-api/channels/test_channel",
@@ -119,8 +125,8 @@ class App extends Component {
                                   stream: null,
                                   id: data._id
                                 }
-                          this.setState({channels: this.state.channels.concat(test_channel)})
-                          //console.log(this.state);
+                          this.setState({allChannels: this.state.allChannels.concat(test_channel)})
+                          this.setState({offlineChannels: this.state.offlineChannels.concat(test_channel)})
                       }.bind(this)
                   })
               }
@@ -153,8 +159,16 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Navbar channels={this.state.channels} displayOnline={this.showOnline.bind(this)} displayOffline={this.showOffline.bind(this)} displayAll={this.showAll.bind(this)} />
-        <Channels channels={this.state.channels}/>
+        <Navbar
+          channels={this.state.channels}
+          displayOnline={this.showOnline.bind(this)}
+          displayOffline={this.showOffline.bind(this)}
+          displayAll={this.showAll.bind(this)}/>
+
+        <Channels
+          allChannels={this.state.allChannels}
+          onlineChannels={this.state.onlineChannels}
+          offlineChannels={this.state.offlineChannels}/>
       </div>
     );
   }
