@@ -9,12 +9,13 @@ class App extends Component {
   constructor() {
       super();
       this.state = {
+          currentChannels: [],
           allChannels: [],
           onlineChannels: [],
           offlineChannels: [],
+
       }
   }
-
 
   getFreeCodeCamp() {
       $.ajax({
@@ -30,6 +31,7 @@ class App extends Component {
                       status: data.stream.channel.status,
                       id: data.stream._id
                   };
+                  this.setState({currentChannels: this.state.currentChannels.concat(freeCodeCamp)})
                   this.setState({allChannels: this.state.allChannels.concat(freeCodeCamp)})
                   this.setState({onlineChannels: this.state.onlineChannels.concat(freeCodeCamp)})
               } else {
@@ -46,6 +48,7 @@ class App extends Component {
                               url: data.url,
                               id: data._id
                           }
+                          this.setState({currentChannels: this.state.currentChannels.concat(freeCodeCamp)})
                           this.setState({allChannels: this.state.allChannels.concat(freeCodeCamp)})
                           this.setState({offlineChannels: this.state.offlineChannels.concat(freeCodeCamp)})
                       }.bind(this)
@@ -69,6 +72,7 @@ class App extends Component {
                       status: data.stream.channel.status,
                       id: data.stream._id
                   }
+                  this.setState({currentChannels: this.state.currentChannels.concat(esl_sc2)})
                   this.setState({allChannels: this.state.allChannels.concat(esl_sc2)})
                   this.setState({onlineChannels: this.state.onlineChannels.concat(esl_sc2)})
               } else {
@@ -85,6 +89,7 @@ class App extends Component {
                               url: data.url,
                               id: data._id
                           }
+                          this.setState({currentChannels: this.state.currentChannels.concat(esl_sc2)})
                           this.setState({allChannels: this.state.allChannels.concat(esl_sc2)})
                           this.setState({offlineChannels: this.state.offlineChannels.concat(esl_sc2)})
                       }.bind(this)
@@ -109,6 +114,7 @@ class App extends Component {
                           status: data.stream.channel.status,
                           id: data.stream._id
                       }
+                      this.setState({currentChannels: this.state.currentChannels.concat(test_channel)})
                       this.setState({allChannels: this.state.allChannels.concat(test_channel)})
                       this.setState({onlineChannels: this.state.onlineChannels.concat(test_channel)})
               } else {
@@ -125,8 +131,9 @@ class App extends Component {
                                   stream: null,
                                   id: data._id
                                 }
-                          this.setState({allChannels: this.state.allChannels.concat(test_channel)})
-                          this.setState({offlineChannels: this.state.offlineChannels.concat(test_channel)})
+                                this.setState({currentChannels: this.state.currentChannels.concat(test_channel)})
+                                this.setState({allChannels: this.state.allChannels.concat(test_channel)})
+                                this.setState({offlineChannels: this.state.offlineChannels.concat(test_channel)})
                       }.bind(this)
                   })
               }
@@ -134,29 +141,27 @@ class App extends Component {
       })
   }
 
-
-
   componentDidMount() {
         this.getFreeCodeCamp();
         this.getESL_SC2();
         this.getTest_Channel();
-     }
+
+      }
 
   showOnline(){
-    console.log("Showing Online");
+    this.setState({currentChannels: this.state.onlineChannels})
   };
 
   showOffline(){
-    console.log("Showing Offline");
+    this.setState({currentChannels: this.state.offlineChannels})
   };
 
   showAll(){
-    console.log("Showing all");
+    this.setState({currentChannels: this.state.allChannels})
   };
 
 
-  render() {
-
+  render(){
     return (
       <div className="App">
         <Navbar
@@ -164,11 +169,8 @@ class App extends Component {
           displayOnline={this.showOnline.bind(this)}
           displayOffline={this.showOffline.bind(this)}
           displayAll={this.showAll.bind(this)}/>
-
         <Channels
-          allChannels={this.state.allChannels}
-          onlineChannels={this.state.onlineChannels}
-          offlineChannels={this.state.offlineChannels}/>
+          currentChannels={this.state.currentChannels}/>
       </div>
     );
   }

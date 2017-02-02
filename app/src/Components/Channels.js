@@ -2,14 +2,9 @@ import React, {Component} from 'react';
 
 
 class Channels extends Component {
-  removeChannel(channel){
-    this.props.remove(channel);
-  }
-    render() {
-      console.log(this.props.offlineChannels)
-
-      const channelList = this.props.onlineChannels.map(channel => {
-      return  <li key={channel.id} ref={channel.stream} className='channel' onClick={this.removeChannel.bind(this, channel, channel.stream)}>
+  render(){
+      const channelList = this.props.currentChannels.map(channel => {
+      return  <li key={channel.id} ref={channel.stream} className='channel'>
         <div className="channel_label">
          <a href={channel.url} target="_blank"> <img
           style={{
