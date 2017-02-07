@@ -10,6 +10,7 @@ class App extends Component {
       super();
       this.state = {
           currentChannels: [],
+          footnote: 'All Channels',
           allChannels: [],
           onlineChannels: [],
           offlineChannels: [],
@@ -29,7 +30,9 @@ class App extends Component {
                       logo: data.stream.channel.logo,
                       name: data.stream.channel.display_name,
                       status: data.stream.channel.status,
-                      id: data.stream._id
+                      id: data.stream._id,
+                      stream:'online'
+
                   };
                   this.setState({currentChannels: this.state.currentChannels.concat(freeCodeCamp)})
                   this.setState({allChannels: this.state.allChannels.concat(freeCodeCamp)})
@@ -43,7 +46,7 @@ class App extends Component {
                           var freeCodeCamp = {
                               name: data.display_name,
                               status: "Currently Offline.",
-                              stream: null,
+                              stream: 'offline',
                               logo: data.logo,
                               url: data.url,
                               id: data._id
@@ -70,7 +73,8 @@ class App extends Component {
                       logo: data.stream.channel.logo,
                       name: data.stream.channel.display_name,
                       status: data.stream.channel.status,
-                      id: data.stream._id
+                      id: data.stream._id,
+                      stream: 'online'
                   }
                   this.setState({currentChannels: this.state.currentChannels.concat(esl_sc2)})
                   this.setState({allChannels: this.state.allChannels.concat(esl_sc2)})
@@ -84,7 +88,7 @@ class App extends Component {
                           var esl_sc2 = {
                               name: data.display_name,
                               status: "Currently Offline.",
-                              stream: null,
+                              stream: "offline",
                               logo: data.logo,
                               url: data.url,
                               id: data._id
@@ -112,7 +116,8 @@ class App extends Component {
                           logo: data.stream.channel.logo,
                           name: data.stream.channel.display_name,
                           status: data.stream.channel.status,
-                          id: data.stream._id
+                          id: data.stream._id,
+                          stream:'online'
                       }
                       this.setState({currentChannels: this.state.currentChannels.concat(test_channel)})
                       this.setState({allChannels: this.state.allChannels.concat(test_channel)})
@@ -128,7 +133,7 @@ class App extends Component {
                                   url: data.url,
                                   logo: data.logo,
                                   status: "Currently Offline.",
-                                  stream: null,
+                                  stream: 'offline',
                                   id: data._id
                                 }
                                 this.setState({currentChannels: this.state.currentChannels.concat(test_channel)})
@@ -150,14 +155,17 @@ class App extends Component {
 
   showOnline(){
     this.setState({currentChannels: this.state.onlineChannels})
+    this.setState({footnote: "Channels Currently Streaming"})
   };
 
   showOffline(){
     this.setState({currentChannels: this.state.offlineChannels})
+    this.setState({footnote: "Channels Currently Offline"})
   };
 
   showAll(){
     this.setState({currentChannels: this.state.allChannels})
+    this.setState({footnote: "All Channels"})
   };
 
 
@@ -170,7 +178,8 @@ class App extends Component {
           displayOffline={this.showOffline.bind(this)}
           displayAll={this.showAll.bind(this)}/>
         <Channels
-          currentChannels={this.state.currentChannels}/>
+          currentChannels={this.state.currentChannels} footnote={this.state.footnote} />
+
       </div>
     );
   }
