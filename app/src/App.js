@@ -53,7 +53,7 @@ class App extends Component {
           };
           this.setState({currentChannels: this.state.currentChannels.concat(freeCodeCamp)})
           this.setState({allChannels: this.state.allChannels.concat(freeCodeCamp)})
-          this.setState({onlineChannels: this.state.onlineChannels.concat(freeCodeCamp)})
+          this.setState({offlineChannels: this.state.offlineChannels.concat(freeCodeCamp)})
 
         })
       }
@@ -77,7 +77,6 @@ class App extends Component {
            id: data.stream._id,
            stream: 'online'
         };
-        //console.log(esl_sc2);
         this.setState({currentChannels: this.state.currentChannels.concat(esl_sc2)})
         this.setState({allChannels: this.state.allChannels.concat(esl_sc2)})
         this.setState({onlineChannels: this.state.onlineChannels.concat(esl_sc2)})
@@ -94,92 +93,52 @@ class App extends Component {
             url: data.url,
             id: data._id
           };
-          console.log(esl_sc2);
+          this.setState({currentChannels: this.state.currentChannels.concat(esl_sc2)})
+          this.setState({allChannels: this.state.allChannels.concat(esl_sc2)})
+          this.setStete({offlineChannels: this.state.offlineChannels.concat(esl_sc2)})
         })
       }
     })
-      // $.ajax({
-      //     url: 'https://wind-bow.gomix.me/twitch-api/streams/esl_sc2',
-      //     type: 'GET',
-      //     dataType: 'json',
-      //     success: function(data) {
-      //         if (data.stream) {
-      //             var esl_sc2 = {
-      //                 url: data.stream.channel.url,
-      //                 logo: data.stream.channel.logo,
-      //                 name: data.stream.channel.display_name,
-      //                 status: data.stream.channel.status,
-      //                 id: data.stream._id,
-      //                 stream: 'online'
-      //             }
-      //             this.setState({currentChannels: this.state.currentChannels.concat(esl_sc2)})
-      //             this.setState({allChannels: this.state.allChannels.concat(esl_sc2)})
-      //             this.setState({onlineChannels: this.state.onlineChannels.concat(esl_sc2)})
-      //         } else {
-      //             $.ajax({
-      //                 url: 'https://wind-bow.gomix.me/twitch-api/channels/esl_sc2',
-      //                 type: 'GET',
-      //                 dataType: 'json',
-      //                 success: function(data) {
-      //                     var esl_sc2 = {
-      //                         name: data.display_name,
-      //                         status: "Currently Offline.",
-      //                         stream: "offline",
-      //                         logo: data.logo,
-      //                         url: data.url,
-      //                         id: data._id
-      //                     }
-      //                     this.setState({currentChannels: this.state.currentChannels.concat(esl_sc2)})
-      //                     this.setState({allChannels: this.state.allChannels.concat(esl_sc2)})
-      //                     this.setState({offlineChannels: this.state.offlineChannels.concat(esl_sc2)})
-      //                 }.bind(this)
-      //
-      //             })
-      //         }
-      //     }.bind(this)
-      // })
   }
 
   getTest_Channel() {
-      $.ajax({
-          url: "https://wind-bow.gomix.me/twitch-api/streams/test_channel",
-          type: 'GET',
-          dataType: 'json',
-          success: function(data) {
-              if (data.stream) {
-                    var  test_channel={
-                          url: data.stream.channel.url,
-                          logo: data.stream.channel.logo,
-                          name: data.stream.channel.display_name,
-                          status: data.stream.channel.status,
-                          id: data.stream._id,
-                          stream:'online'
-                      }
-                      this.setState({currentChannels: this.state.currentChannels.concat(test_channel)})
-                      this.setState({allChannels: this.state.allChannels.concat(test_channel)})
-                      this.setState({onlineChannels: this.state.onlineChannels.concat(test_channel)})
-              } else {
-                  $.ajax({
-                      url: "https://wind-bow.gomix.me/twitch-api/channels/test_channel",
-                      type: 'GET',
-                      dataType: 'json',
-                      success: function(data) {
-                            var  test_channel= {
-                                  name: data.display_name,
-                                  url: data.url,
-                                  logo: data.logo,
-                                  status: "Currently Offline.",
-                                  stream: 'offline',
-                                  id: data._id
-                                }
-                                this.setState({currentChannels: this.state.currentChannels.concat(test_channel)})
-                                this.setState({allChannels: this.state.allChannels.concat(test_channel)})
-                                this.setState({offlineChannels: this.state.offlineChannels.concat(test_channel)})
-                      }.bind(this)
-                  })
-              }
-          }.bind(this)
-      })
+    let test_channel;
+
+    fetch('https://wind-bow.glitch.me/twitch-api/streams/test_channel')
+    .then((response) => {
+      return response.json()
+    }).then((data) => {
+      if(data.stream){
+        test_channel = {
+          url: data.stream.channel.url,
+          logo: data.stream.channel.logo,
+          name: data.stream.channel.display_name,
+          status: data.stream.channel.status,
+          id: data.stream._id,
+          stream:'online'
+        };
+        this.setState({currentChannels: this.state.currentChannels.concat(test_channel)})
+        this.setState({allChannels: this.state.allChannels.concat(test_channel)})
+        this.setState({onlineChannels: this.state.onlineChannels.concat(test_channel)})
+      } else {
+        fetch('https://wind-bow.glitch.me/twitch-api/channels/test_channel')
+        .then((response) => {
+          return response.json()
+        }).then((data) => {
+          test_channel = {
+            name: data.display_name,
+            url: data.url,
+            logo: data.logo,
+            status: "Currently Offline.",
+            stream: 'offline',
+            id: data._id
+          };
+          this.setState({currentChannels: this.state.currentChannels.concat(test_channel)})
+          this.setState({allChannels: this.state.allChannels.concat(test_channel)})
+          this.setState({offlineChannels: this.state.offlineChannels.concat(test_channel)})
+        })
+      }
+    })
   }
 
   componentDidMount() {

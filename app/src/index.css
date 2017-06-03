@@ -122,4 +122,6 @@ h3{
 img{
   align-self: flex-start;
   background-image:url("http://www.videoadnews.com/wp-content/uploads/2014/05/twitch-icon-box.jpg");
+  background-position: center;
+  background-size: contain;
 }
